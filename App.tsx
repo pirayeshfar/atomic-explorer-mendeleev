@@ -10,7 +10,6 @@ const App: React.FC = () => {
   const [selectedElement, setSelectedElement] = useState<ElementData | null>(null);
   const [funFact, setFunFact] = useState<string | null>(null);
   const [loadingFact, setLoadingFact] = useState(false);
-  const [copySuccess, setCopySuccess] = useState(false);
 
   const gridData = useMemo(() => {
     const layout = Array(10).fill(null).map(() => Array(18).fill(null));
@@ -36,12 +35,6 @@ const App: React.FC = () => {
     }
   };
 
-  const shareApp = () => {
-    navigator.clipboard.writeText(window.location.href);
-    setCopySuccess(true);
-    setTimeout(() => setCopySuccess(false), 2000);
-  };
-
   const printElement = () => {
     window.print();
   };
@@ -49,6 +42,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (selectedElement) {
       setLoadingFact(true);
+      setFunFact(null);
       getElementFunFact(selectedElement.name, selectedElement.persianName).then(fact => {
         setFunFact(fact);
         setLoadingFact(false);
@@ -114,12 +108,6 @@ const App: React.FC = () => {
             onChange={handleSearch}
             className="w-full max-w-[160px] bg-slate-950/80 text-white border-2 border-blue-500/30 rounded-3xl py-5 focus:outline-none focus:border-blue-400 transition-all text-5xl text-center font-black shadow-inner"
           />
-          <button 
-            onClick={shareApp}
-            className={`w-full py-3 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all ${copySuccess ? 'bg-emerald-500 text-white shadow-emerald-500/20' : 'bg-blue-600/10 text-blue-400 border border-blue-500/20 hover:bg-blue-600/20'}`}
-          >
-            {copySuccess ? 'لینک کپی شد ✨' : 'اشتراک‌گذاری با معلم 🔗'}
-          </button>
         </div>
 
         <div className="lg:col-span-8 bg-white/[0.03] backdrop-blur-2xl p-8 rounded-[2rem] border border-white/10 shadow-2xl min-h-[400px] flex items-center justify-center relative overflow-hidden print-content">
@@ -171,7 +159,7 @@ const App: React.FC = () => {
                     <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce [animation-delay:0.4s]"></div>
                   </div>
                 ) : (
-                  <p className="text-slate-100 text-lg leading-relaxed pt-2">"{funFact}"</p>
+                  <p className="text-slate-100 text-lg leading-relaxed pt-2">{funFact ? `"${funFact}"` : "در حال بارگذاری..."}</p>
                 )}
               </div>
             </div>
