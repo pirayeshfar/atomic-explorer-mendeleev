@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { ElementData } from '../types';
-import { CATEGORY_COLORS } from '../constants';
+import { ElementData } from '../types.ts';
+import { CATEGORY_COLORS } from '../constants.ts';
 
 interface ElementCellProps {
   element: ElementData | null;

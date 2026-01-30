@@ -1,5 +1,5 @@
 
-import { ElementData, ElementCategory } from './types';
+import { ElementData, ElementCategory } from './types.ts';
 
 export const CATEGORY_COLORS: Record<ElementCategory, string> = {
   [ElementCategory.ALKALI_METAL]: 'bg-emerald-600',
@@ -84,7 +84,6 @@ export const ELEMENTS: ElementData[] = [
   { atomicNumber: 54, symbol: 'Xe', name: 'Xenon', persianName: 'زنون', category: ElementCategory.NOBLE_GAS, electronConfig: '[Kr] 4d¹⁰ 5s² 5p⁶', group: 18, period: 5, atomicMass: 131.29 },
   { atomicNumber: 55, symbol: 'Cs', name: 'Caesium', persianName: 'سزیم', category: ElementCategory.ALKALI_METAL, electronConfig: '[Xe] 6s¹', group: 1, period: 6, atomicMass: 132.91 },
   { atomicNumber: 56, symbol: 'Ba', name: 'Barium', persianName: 'باریم', category: ElementCategory.ALKALINE_EARTH, electronConfig: '[Xe] 6s²', group: 2, period: 6, atomicMass: 137.33 },
-  // Lanthanides (Atomic 57-71) - Positioned in bottom rows but logic in App handles them
   { atomicNumber: 57, symbol: 'La', name: 'Lanthanum', persianName: 'لانتان', category: ElementCategory.LANTHANIDE, electronConfig: '[Xe] 5d¹ 6s²', group: 3, period: 6, atomicMass: 138.91 },
   { atomicNumber: 58, symbol: 'Ce', name: 'Cerium', persianName: 'سریم', category: ElementCategory.LANTHANIDE, electronConfig: '[Xe] 4f¹ 5d¹ 6s²', group: 4, period: 6, atomicMass: 140.12 },
   { atomicNumber: 59, symbol: 'Pr', name: 'Praseodymium', persianName: 'پرازئودیمیم', category: ElementCategory.LANTHANIDE, electronConfig: '[Xe] 4f³ 6s²', group: 5, period: 6, atomicMass: 140.91 },
@@ -100,7 +99,6 @@ export const ELEMENTS: ElementData[] = [
   { atomicNumber: 69, symbol: 'Tm', name: 'Thulium', persianName: 'تولیم', category: ElementCategory.LANTHANIDE, electronConfig: '[Xe] 4f¹³ 6s²', group: 15, period: 6, atomicMass: 168.93 },
   { atomicNumber: 70, symbol: 'Yb', name: 'Ytterbium', persianName: 'ایتربیم', category: ElementCategory.LANTHANIDE, electronConfig: '[Xe] 4f¹⁴ 6s²', group: 16, period: 6, atomicMass: 173.05 },
   { atomicNumber: 71, symbol: 'Lu', name: 'Lutetium', persianName: 'لوتتیم', category: ElementCategory.LANTHANIDE, electronConfig: '[Xe] 4f¹¹ 5d¹ 6s²', group: 17, period: 6, atomicMass: 174.97 },
-  // Back to Main Table Period 6
   { atomicNumber: 72, symbol: 'Hf', name: 'Hafnium', persianName: 'هافنیم', category: ElementCategory.TRANSITION_METAL, electronConfig: '[Xe] 4f¹⁴ 5d² 6s²', group: 4, period: 6, atomicMass: 178.49 },
   { atomicNumber: 73, symbol: 'Ta', name: 'Tantalum', persianName: 'تانتال', category: ElementCategory.TRANSITION_METAL, electronConfig: '[Xe] 4f¹⁴ 5d³ 6s²', group: 5, period: 6, atomicMass: 180.95 },
   { atomicNumber: 74, symbol: 'W', name: 'Tungsten', persianName: 'تنگستن', category: ElementCategory.TRANSITION_METAL, electronConfig: '[Xe] 4f¹⁴ 5d⁴ 6s²', group: 6, period: 6, atomicMass: 183.84 },
@@ -116,10 +114,8 @@ export const ELEMENTS: ElementData[] = [
   { atomicNumber: 84, symbol: 'Po', name: 'Polonium', persianName: 'پولونیم', category: ElementCategory.METALLOID, electronConfig: '[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁴', group: 16, period: 6, atomicMass: 209 },
   { atomicNumber: 85, symbol: 'At', name: 'Astatine', persianName: 'استاتین', category: ElementCategory.METALLOID, electronConfig: '[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁵', group: 17, period: 6, atomicMass: 210 },
   { atomicNumber: 86, symbol: 'Rn', name: 'Radon', persianName: 'رادون', category: ElementCategory.NOBLE_GAS, electronConfig: '[Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁶', group: 18, period: 6, atomicMass: 222 },
-  // Period 7
   { atomicNumber: 87, symbol: 'Fr', name: 'Francium', persianName: 'فرانسیم', category: ElementCategory.ALKALI_METAL, electronConfig: '[Rn] 7s¹', group: 1, period: 7, atomicMass: 223 },
   { atomicNumber: 88, symbol: 'Ra', name: 'Radium', persianName: 'رادیم', category: ElementCategory.ALKALINE_EARTH, electronConfig: '[Rn] 7s²', group: 2, period: 7, atomicMass: 226 },
-  // Actinides (Atomic 89-103)
   { atomicNumber: 89, symbol: 'Ac', name: 'Actinium', persianName: 'اکتینیم', category: ElementCategory.ACTINIDE, electronConfig: '[Rn] 6d¹ 7s²', group: 3, period: 7, atomicMass: 227 },
   { atomicNumber: 90, symbol: 'Th', name: 'Thorium', persianName: 'توریم', category: ElementCategory.ACTINIDE, electronConfig: '[Rn] 6d² 7s²', group: 4, period: 7, atomicMass: 232.04 },
   { atomicNumber: 91, symbol: 'Pa', name: 'Protactinium', persianName: 'پروتاکتینیم', category: ElementCategory.ACTINIDE, electronConfig: '[Rn] 5f² 6d¹ 7s²', group: 5, period: 7, atomicMass: 231.04 },
@@ -135,7 +131,6 @@ export const ELEMENTS: ElementData[] = [
   { atomicNumber: 101, symbol: 'Md', name: 'Mendelevium', persianName: 'مندلیفیم', category: ElementCategory.ACTINIDE, electronConfig: '[Rn] 5f¹³ 7s²', group: 15, period: 7, atomicMass: 258 },
   { atomicNumber: 102, symbol: 'No', name: 'Nobelium', persianName: 'نوبلیم', category: ElementCategory.ACTINIDE, electronConfig: '[Rn] 5f¹⁴ 7s²', group: 16, period: 7, atomicMass: 259 },
   { atomicNumber: 103, symbol: 'Lr', name: 'Lawrencium', persianName: 'لورنسیم', category: ElementCategory.ACTINIDE, electronConfig: '[Rn] 5f¹⁴ 7s² 7p¹', group: 17, period: 7, atomicMass: 262 },
-  // Last row main table
   { atomicNumber: 104, symbol: 'Rf', name: 'Rutherfordium', persianName: 'رادرفوردیم', category: ElementCategory.TRANSITION_METAL, electronConfig: '[Rn] 5f¹⁴ 6d² 7s²', group: 4, period: 7, atomicMass: 267 },
   { atomicNumber: 105, symbol: 'Db', name: 'Dubnium', persianName: 'دوبنیم', category: ElementCategory.TRANSITION_METAL, electronConfig: '[Rn] 5f¹⁴ 6d³ 7s²', group: 5, period: 7, atomicMass: 268 },
   { atomicNumber: 106, symbol: 'Sg', name: 'Seaborgium', persianName: 'سیبورگیم', category: ElementCategory.TRANSITION_METAL, electronConfig: '[Rn] 5f¹⁴ 6d⁴ 7s²', group: 6, period: 7, atomicMass: 269 },

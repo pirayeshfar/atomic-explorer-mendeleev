@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { ELEMENTS, CATEGORY_NAMES_FA, CATEGORY_COLORS } from './constants';
-import { ElementData, ElementCategory } from './types';
-import ElementCell from './components/ElementCell';
-import { getElementFunFact } from './geminiService';
+import { ELEMENTS, CATEGORY_NAMES_FA, CATEGORY_COLORS } from './constants.ts';
+import { ElementData, ElementCategory } from './types.ts';
+import ElementCell from './components/ElementCell.tsx';
+import { getElementFunFact } from './geminiService.ts';
 
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -102,7 +102,6 @@ const App: React.FC = () => {
 
       {/* Detail Area */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* Interaction Card */}
         <div className="lg:col-span-4 bg-slate-800/30 backdrop-blur-xl p-8 rounded-[2rem] border border-white/10 flex flex-col justify-center items-center space-y-6 no-print">
           <div className="text-center space-y-2">
             <h3 className="text-cyan-400 font-black text-2xl">جستجوی اتمی</h3>
@@ -123,12 +122,10 @@ const App: React.FC = () => {
           </button>
         </div>
 
-        {/* Content Card */}
         <div className="lg:col-span-8 bg-white/[0.03] backdrop-blur-2xl p-8 rounded-[2rem] border border-white/10 shadow-2xl min-h-[400px] flex items-center justify-center relative overflow-hidden print-content">
           {selectedElement ? (
             <div className="w-full flex flex-col gap-8 animate-in fade-in zoom-in duration-500">
               <div className="flex flex-col md:flex-row gap-10">
-                {/* Visual Square */}
                 <div className={`flex-shrink-0 w-48 h-48 rounded-[2.5rem] flex flex-col items-center justify-center shadow-2xl ${CATEGORY_COLORS[selectedElement.category]} p-8 border-8 border-white/10 relative overflow-hidden group`}>
                   <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <span className="absolute top-4 left-5 text-white/40 text-2xl font-black">{selectedElement.atomicNumber}</span>
@@ -136,7 +133,6 @@ const App: React.FC = () => {
                   <span className="text-xl font-bold text-white/90 mt-2">{selectedElement.persianName}</span>
                 </div>
 
-                {/* Info Text */}
                 <div className="flex-grow flex flex-col justify-between space-y-6">
                   <div className="flex justify-between items-start">
                     <div className="space-y-1">
@@ -166,7 +162,6 @@ const App: React.FC = () => {
                 </div>
               </div>
 
-              {/* AI Fact Section */}
               <div className="bg-gradient-to-r from-blue-600/10 via-indigo-600/5 to-transparent p-6 rounded-[1.5rem] border border-blue-500/20 relative">
                 <div className="absolute -top-3 right-6 bg-blue-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">دانستنی هوشمند</div>
                 {loadingFact ? (
@@ -189,10 +184,8 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      {/* Beautiful Footer (Restored from previous best version) */}
       <footer className="mt-auto pt-10 border-t border-white/5 pb-8 no-print">
         <div className="flex flex-col md:flex-row justify-between items-center gap-10">
-          {/* Authors Section */}
           <div className="flex items-center gap-6">
             <div className="flex -space-x-4">
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center text-2xl shadow-lg shadow-pink-500/20 border-2 border-white/20 z-10">🧬</div>
@@ -210,14 +203,12 @@ const App: React.FC = () => {
             </div>
           </div>
 
-          {/* Teacher Section */}
           <div className="bg-white/[0.02] px-10 py-5 rounded-[2rem] border border-white/10 text-center space-y-1 backdrop-blur-md">
             <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">با سپاس بیکران از:</p>
             <h4 className="text-xl font-black text-white">سرکار خانم احمدزاده</h4>
             <p className="text-blue-400/70 text-xs">دبیر محترم و راهنمای علمی پروژه</p>
           </div>
 
-          {/* Meta */}
           <div className="text-right space-y-1">
             <div className="text-slate-700 text-[10px] font-bold uppercase tracking-widest leading-none">Powered by Pirayeshfar</div>
             <div className="text-slate-600 text-[9px]">تمامی حقوق برای یادگیری بهتر علوم محفوظ است © ۱۴۰۳</div>
@@ -237,11 +228,6 @@ const App: React.FC = () => {
             position: absolute; 
             top: 0; left: 0; 
             padding: 0 !important;
-          }
-          .print-content h2, .print-content span, .print-content p, .print-content strong { color: black !important; }
-          .print-content .bg-slate-900, .print-content .bg-slate-950, .print-content .bg-slate-800 { 
-            background: #f1f5f9 !important; 
-            border: 1px solid #cbd5e1 !important; 
           }
         }
       `}</style>
