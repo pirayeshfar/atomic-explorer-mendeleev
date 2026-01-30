@@ -8,12 +8,6 @@
     <title>آزمایشگاه مجازی مندلیف</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;400;700;900&display=swap" rel="stylesheet">
-    <script>
-      // این شبیه‌ساز به مرورگر اجازه می‌دهد متغیرهای تزریق شده توسط Vercel را در صورت وجود شناسایی کند
-      if (typeof window.process === 'undefined') {
-        window.process = { env: {} };
-      }
-    </script>
     <style>
         body {
             font-family: 'Vazirmatn', sans-serif;
@@ -50,6 +44,10 @@
         .scrollbar-thin::-webkit-scrollbar-track { background: #1e293b; border-radius: 10px; }
         .scrollbar-thin::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
         .scrollbar-thin::-webkit-scrollbar-thumb:hover { background: #64748b; }
+        @media print {
+          .no-print { display: none !important; }
+          body { background: white !important; color: black !important; }
+        }
     </style>
 <script type="importmap">
 {
