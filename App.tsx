@@ -28,8 +28,17 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col p-4 md:p-8 space-y-8 max-w-[1500px] mx-auto text-right" dir="rtl">
       
+      {/* عنوان اصلی و جذاب برای جدول */}
+      <div className="text-center space-y-2 no-print">
+        <h1 className="text-4xl md:text-5xl font-black bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent drop-shadow-sm">
+          اطلس تعاملی ذرات بنیادین مندلیف
+        </h1>
+        <p className="text-slate-500 text-sm font-bold tracking-[0.2em] uppercase">Mendeleev Atomic Atlas | Smart Science Edition</p>
+      </div>
+
       {/* جدول تناوبی (بخش فوقانی) */}
-      <div className="bg-slate-900/40 p-6 rounded-[2rem] border border-white/5 shadow-2xl backdrop-blur-md no-print">
+      <div className="bg-slate-900/40 p-6 rounded-[2rem] border border-white/5 shadow-2xl backdrop-blur-md no-print relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
         <div className="overflow-x-auto pb-4 scrollbar-thin">
           <div className="periodic-grid min-w-[1000px]" dir="ltr">
             {gridData.map((row, rIdx) => (
@@ -113,12 +122,12 @@ const App: React.FC = () => {
                 <div className="absolute right-0 top-0 bottom-0 w-1.5 bg-blue-500 rounded-l-full"></div>
               </div>
 
-              {/* بخش توضیحات (جایگزین هوش مصنوعی) */}
+              {/* بخش توضیحات ثابت */}
               <div className="bg-[#0f1d3a]/30 p-8 rounded-[2rem] border border-blue-500/20 relative">
                 <div className="absolute -top-3 right-8 bg-blue-600 text-white px-3 py-1 rounded-full text-[10px] font-black shadow-lg">دانستنی هوشمند</div>
                 <p className="text-slate-300 text-lg leading-relaxed text-center font-medium">
                    این عنصر از اجزای بنیادی در ساختار ماده است که در صنایع مختلف و طبیعت نقشی کلیدی ایفا می‌کند. 
-                   (تحلیل‌های پیشرفته در نسخه‌های آینده در دسترس خواهد بود)
+                   اطلاعات دقیق ساختار اتمی، ظرفیت‌ها و خواص فیزیکی در شناسنامه اختصاصی هر عنصر قابل مشاهده است.
                 </p>
               </div>
             </div>
@@ -169,7 +178,7 @@ const App: React.FC = () => {
 
       </div>
 
-      {/* فوتر دقیقاً مطابق تصویر */}
+      {/* فوتر دقیقاً مطابق تصویر با سال جدید */}
       <footer className="mt-auto pt-16 pb-8 no-print border-t border-white/5">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
           
@@ -198,10 +207,10 @@ const App: React.FC = () => {
             </div>
           </div>
 
-          {/* بخش لوگو و حقوق (چپ) */}
+          {/* بخش لوگو و حقوق (چپ) - سال به 1404 تغییر کرد */}
           <div className="order-3 flex flex-col items-start space-y-1">
              <p className="text-slate-500 text-[10px] font-black tracking-widest">POWERED BY PIRAYESHFAIR</p>
-             <p className="text-slate-700 text-[9px] font-bold">تمامی حقوق برای یادگیری بهتر علوم محفوظ است © ۱۴۰۳</p>
+             <p className="text-slate-700 text-[9px] font-bold">تمامی حقوق برای یادگیری بهتر علوم محفوظ است © ۱۴۰۴</p>
           </div>
 
         </div>
