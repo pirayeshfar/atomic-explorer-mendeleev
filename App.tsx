@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo } from 'react';
 import { ELEMENTS, CATEGORY_NAMES_FA, CATEGORY_COLORS } from './constants';
 import { ElementData, ElementCategory } from './types';
@@ -52,7 +51,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col p-4 md:p-8 space-y-6 max-w-[1400px] mx-auto overflow-x-hidden">
-      {/* Header - Restored Original Style */}
+      {/* هدر لوکس پروژه */}
       <header className="text-center space-y-3 no-print">
         <h1 className="text-4xl md:text-6xl font-black bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent drop-shadow-2xl">
           آزمایشگاه مجازی مندلیف
@@ -64,7 +63,7 @@ const App: React.FC = () => {
         </div>
       </header>
 
-      {/* Periodic Table Area */}
+      {/* بخش جدول تناوبی */}
       <div className="bg-slate-900/40 p-5 rounded-[2.5rem] border border-white/5 shadow-2xl backdrop-blur-sm no-print">
         <div className="overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-slate-700">
           <div className="periodic-grid min-w-[1100px]" dir="ltr">
@@ -94,7 +93,7 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      {/* Detail Area */}
+      {/* بخش جزئیات و دانستنی */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div className="lg:col-span-4 bg-slate-800/30 backdrop-blur-xl p-8 rounded-[2rem] border border-white/10 flex flex-col justify-center items-center space-y-6 no-print">
           <div className="text-center space-y-2">
@@ -159,7 +158,7 @@ const App: React.FC = () => {
                     <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce [animation-delay:0.4s]"></div>
                   </div>
                 ) : (
-                  <p className="text-slate-100 text-lg leading-relaxed pt-2">{funFact}</p>
+                  <p className="text-slate-100 text-lg leading-relaxed pt-2">{funFact || "در حال آماده‌سازی تحلیل اتمی..."}</p>
                 )}
               </div>
             </div>
@@ -172,7 +171,7 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      {/* Footer - Restored Original Style */}
+      {/* فوتر سه‌بخشی لوکس - احیا شده */}
       <footer className="mt-auto pt-10 border-t border-white/5 pb-8 no-print">
         <div className="flex flex-col md:flex-row justify-between items-center gap-10">
           <div className="flex items-center gap-6">
