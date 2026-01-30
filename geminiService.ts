@@ -2,41 +2,37 @@
 import { GoogleGenAI } from "@google/genai";
 
 /**
- * سرویس هوشمند برای دریافت دانستنی‌های عناصر
+ * دریافت مستقیم دانستنی‌های علمی از هوش مصنوعی جمینای
  */
 export async function getElementFunFact(elementName: string, persianName: string) {
   try {
-    // استفاده مستقیم طبق راهنمای SDK
-    const apiKey = process.env.API_KEY;
-
-    if (!apiKey || apiKey === "undefined") {
-      return "⚠️ کلید شناسایی نشد. لطفاً در پنل Vercel گزینه Redeploy را بزنید.";
-    }
-
-    const ai = new GoogleGenAI({ apiKey: apiKey });
+    // مقداردهی مستقیم طبق دستورالعمل SDK
+    // این بخش در زمان Build توسط Vercel جایگزین می‌شود
+    const ai = new GoogleGenAI({ 
+      apiKey: process.env.API_KEY 
+    });
     
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
-      contents: `یک فکت علمی بسیار کوتاه و جذاب درباره عنصر "${persianName}" برای دانش‌آموز نهم بنویس.`,
+      contents: `یک فکت علمی بسیار کوتاه، جذاب و آموزنده درباره عنصر "${persianName}" بنویس.`,
       config: {
-        systemInstruction: "پاسخ فقط به زبان فارسی، علمی و حداکثر ۱۲ کلمه باشد.",
+        systemInstruction: "شما یک دستیار آزمایشگاه علوم هستید. پاسخ باید فقط به زبان فارسی، علمی و حداکثر در ۱۰ کلمه باشد. از کلمات تشویقی برای دانش‌آموزان استفاده کن.",
         temperature: 0.8,
       }
     });
 
+    // استخراج متن مستقیم از پاسخ
     if (response && response.text) {
       return response.text.trim();
     }
     
-    return "در حال حاضر اطلاعاتی در دسترس نیست.";
+    return "ذره‌ای از هستی که منتظر کشف توست!";
     
   } catch (error: any) {
-    console.error("Gemini Error:", error);
+    // لاگ کردن خطا در کنسول برای عیب‌یابی فنی (فقط برای توسعه‌دهنده)
+    console.error("Gemini Connection Status:", error);
     
-    if (error.message?.includes("API key not valid") || error.status === 401) {
-      return "❌ کلید API معتبر نیست. لطفاً در گوگل استودیو کلید جدید بسازید.";
-    }
-    
-    return "اتصال به شبکه هوشمند برقرار نشد. لطفاً Redeploy کنید یا اینترنت را چک کنید.";
+    // نمایش پیام ملایم به کاربر در صورت بروز هرگونه مشکل ارتباطی
+    return "در حال تحلیل اتمی... (لطفاً لحظاتی دیگر دوباره روی عنصر کلیک کنید)";
   }
 }
