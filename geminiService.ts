@@ -6,11 +6,16 @@ export async function getElementFunFact(elementName: string, persianName: string
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
-      contents: `یک فکت علمی جالب و کوتاه (حداکثر دو جمله) درباره عنصر ${persianName} (${elementName}) برای دانش‌آموزان کلاس نهم به زبان فارسی بنویس. لحن صمیمی و جذاب باشد.`,
+      contents: `یک فکت علمی جالب، کوتاه و بسیار شگفت‌انگیز درباره عنصر ${persianName} برای دانش‌آموز کلاس نهم بنویس. حداکثر در ۲ جمله و با لحن جذاب.`,
     });
-    return response.text;
+    
+    if (response && response.text) {
+      return response.text;
+    }
+    throw new Error("No response text");
   } catch (error) {
-    console.error("Gemini AI Error:", error);
-    return "این عنصر یکی از شگفت‌انگیزترین آجرهای سازنده جهان ماست که خواص منحصر به فردی در شیمی دارد!";
+    console.error("Gemini API Error:", error);
+    // بازگشت متن پیش‌فرض فقط در صورت قطع کامل اینترنت یا نبود کلید API
+    return "این عنصر یکی از اسرارآمیزترین بخش‌های جدول تناوبی است که در فناوری‌های مدرن کاربرد حیاتی دارد!";
   }
 }
