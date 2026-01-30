@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { ELEMENTS, CATEGORY_NAMES_FA, CATEGORY_COLORS } from './constants.ts';
-import { ElementData, ElementCategory } from './types.ts';
-import ElementCell from './components/ElementCell.tsx';
-import { getElementFunFact } from './geminiService.ts';
+import { ELEMENTS, CATEGORY_NAMES_FA, CATEGORY_COLORS } from './constants';
+import { ElementData, ElementCategory } from './types';
+import ElementCell from './components/ElementCell';
+import { getElementFunFact } from './geminiService';
 
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');

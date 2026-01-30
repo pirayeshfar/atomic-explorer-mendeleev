@@ -1,19 +1,13 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-// استفاده از یک مقدار پیش‌فرض برای جلوگیری از خطای ReferenceError در مرورگر
-const getApiKey = () => {
-  try {
-    return process.env.API_KEY || "";
-  } catch (e) {
-    return "";
-  }
-};
-
 export async function getElementFunFact(elementName: string, persianName: string) {
-  const apiKey = getApiKey();
-  if (!apiKey) {
-    return "لطفاً کلید API را در تنظیمات Vercel وارد کنید تا هوش مصنوعی فعال شود.";
+  // دسترسی مستقیم به متغیر محیطی طبق دستورالعمل
+  const apiKey = process.env.API_KEY;
+
+  if (!apiKey || apiKey === "undefined") {
+    console.error("API Key is missing in process.env");
+    return "لطفاً در پنل Vercel، متغیر API_KEY را در بخش Environment Variables تعریف کرده و دوباره پروژه را Deploy کنید.";
   }
 
   try {
@@ -24,7 +18,7 @@ export async function getElementFunFact(elementName: string, persianName: string
     });
     return response.text;
   } catch (error) {
-    console.error("Error fetching fun fact:", error);
-    return "اتصالی به دنیای اتم‌ها برقرار نشد! اما این عنصر بسیار شگفت‌انگیز است.";
+    console.error("Gemini AI Error:", error);
+    return "هوش مصنوعی در حال حاضر در دسترس نیست، اما این عنصر یکی از آجرهای سازنده جهان ماست!";
   }
 }

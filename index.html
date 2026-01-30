@@ -8,6 +8,10 @@
     <title>آزمایشگاه مجازی مندلیف</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;400;700;900&display=swap" rel="stylesheet">
+    <script>
+      // این بخش برای جلوگیری از خطای "process is not defined" در مرورگر ضروری است
+      window.process = window.process || { env: {} };
+    </script>
     <style>
         body {
             font-family: 'Vazirmatn', sans-serif;
@@ -40,7 +44,6 @@
             50% { transform: scale(1.1); }
             100% { transform: scale(1.05); }
         }
-        /* Custom Scrollbar for the table */
         .scrollbar-thin::-webkit-scrollbar { height: 6px; }
         .scrollbar-thin::-webkit-scrollbar-track { background: #1e293b; border-radius: 10px; }
         .scrollbar-thin::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
