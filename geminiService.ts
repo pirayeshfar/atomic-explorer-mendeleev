@@ -3,43 +3,37 @@ import { GoogleGenAI } from "@google/genai";
 
 /**
  * دریافت دانستنی‌های علمی از هوش مصنوعی جمینای
- * این نسخه بهینه‌سازی شده تا با محدودیت‌های مرورگر در Vercel سازگار باشد.
+ * مقداردهی هوش مصنوعی مستقیماً داخل تابع انجام می‌شود تا آخرین مقدار کلید را دریافت کند.
  */
 export async function getElementFunFact(elementName: string, persianName: string) {
-  try {
-    // تلاش برای خواندن کلید از محیط‌های مختلف تزریق شده
-    const key = process.env.API_KEY || "";
-    
-    if (!key) {
-      console.warn("هشدار: API_KEY هنوز در دسترس نیست. لطفاً تنظیمات Vercel را چک کنید.");
-    }
+  // دریافت کلید مستقیماً از محیط اجرا
+  const apiKey = process.env.API_KEY;
+  
+  if (!apiKey || apiKey === "") {
+    throw new Error("API_KEY_MISSING");
+  }
 
-    const ai = new GoogleGenAI({ 
-      apiKey: key 
-    });
+  try {
+    // ایجاد نمونه جدید در هر فراخوانی برای اطمینان از تازگی کلید (مطابق استانداردهای جدید)
+    const ai = new GoogleGenAI({ apiKey });
 
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
-      contents: `یک فکت (دانستنی) علمی بسیار کوتاه، هیجان‌انگیز و جدید درباره عنصر "${persianName}" برای دانش‌آموزان نهم بنویس.`,
+      contents: `یک دانستنی (فکت) علمی بسیار کوتاه، هیجان‌انگیز و آموزنده درباره عنصر "${persianName}" (${elementName}) برای دانش‌آموزان پایه نهم بنویس.`,
       config: {
-        systemInstruction: "شما یک دستیار هوشمند آزمایشگاه هستید. پاسخ فقط فارسی، علمی و حداکثر ۱۰ کلمه باشد. از لحن صمیمی استفاده کن.",
-        temperature: 0.8,
+        systemInstruction: "پاسخ فقط فارسی، علمی، دقیق و حداکثر ۱۰ کلمه باشد. از کلمات جذاب استفاده کن.",
+        temperature: 0.9,
       }
     });
 
-    if (response && response.text) {
-      return response.text.trim();
-    }
-    
-    return "اتم‌ها اسرار زیادی دارند، این یکی هنوز کشف نشده!";
+    return response.text?.trim() || "اتم‌ها اسرار زیادی دارند!";
     
   } catch (error: any) {
-    // ثبت خطا برای عیب‌یابی توسط رزا و رزیتا در کنسول (F12)
-    console.group("اطلاعات خطای آزمایشگاه:");
-    console.error("جزئیات:", error?.message || error);
-    console.log("وضعیت متغیرها:", typeof process !== 'undefined' ? "Process تعریف شده" : "Process تعریف نشده!");
-    console.groupEnd();
-    
-    return "در حال تحلیل اتمی... (لطفاً لحظاتی دیگر دوباره روی عنصر کلیک کنید یا صفحه را رفرش نمایید)";
+    console.error("Gemini API Error:", error);
+    // اگر خطا مربوط به پیدا نشدن موجودیت بود، باید دوباره کلید انتخاب شود
+    if (error?.message?.includes("not found")) {
+       throw new Error("API_KEY_INVALID");
+    }
+    return "در حال تحلیل اتمی... (لطفاً دوباره امتحان کنید)";
   }
 }
