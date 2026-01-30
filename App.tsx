@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo } from 'react';
 import { ELEMENTS, CATEGORY_NAMES_FA, CATEGORY_COLORS } from './constants';
 import { ElementData, ElementCategory } from './types';
@@ -42,10 +43,18 @@ const App: React.FC = () => {
     if (selectedElement) {
       setLoadingFact(true);
       setFunFact(null);
-      getElementFunFact(selectedElement.name, selectedElement.persianName).then(fact => {
-        setFunFact(fact);
-        setLoadingFact(false);
-      });
+      
+      // فراخوانی سرویس هوشمند
+      getElementFunFact(selectedElement.name, selectedElement.persianName)
+        .then(fact => {
+          setFunFact(fact);
+          setLoadingFact(false);
+        })
+        .catch(err => {
+          console.error("UI Catch:", err);
+          setFunFact("خطای غیرمنتظره در پردازش. لطفاً کنسول را چک کنید.");
+          setLoadingFact(false);
+        });
     }
   }, [selectedElement]);
 
@@ -149,16 +158,22 @@ const App: React.FC = () => {
                 </div>
               </div>
 
-              <div className="bg-gradient-to-r from-blue-600/10 via-indigo-600/5 to-transparent p-6 rounded-[1.5rem] border border-blue-500/20 relative">
+              {/* باکس دانستنی‌های هوشمند */}
+              <div className="bg-gradient-to-r from-blue-600/10 via-indigo-600/5 to-transparent p-6 rounded-[1.5rem] border border-blue-500/20 relative min-h-[100px] flex items-center">
                 <div className="absolute -top-3 right-6 bg-blue-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">دانستنی هوشمند</div>
                 {loadingFact ? (
-                  <div className="flex gap-2 items-center py-3">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce [animation-delay:0.2s]"></div>
-                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce [animation-delay:0.4s]"></div>
+                  <div className="flex gap-4 items-center py-4 w-full justify-center">
+                    <div className="flex space-x-2 space-x-reverse">
+                      <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce"></div>
+                      <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce [animation-delay:0.2s]"></div>
+                      <div className="w-3 h-3 bg-blue-500 rounded-full animate-bounce [animation-delay:0.4s]"></div>
+                    </div>
+                    <span className="text-slate-400 text-sm font-bold">در حال دریافت تحلیل اتمی...</span>
                   </div>
                 ) : (
-                  <p className="text-slate-100 text-lg leading-relaxed pt-2">{funFact || "در حال آماده‌سازی تحلیل اتمی..."}</p>
+                  <p className="text-slate-100 text-lg leading-relaxed pt-2">
+                    {funFact || "در حال آماده‌سازی تحلیل اتمی توسط جمینای..."}
+                  </p>
                 )}
               </div>
             </div>
@@ -171,7 +186,7 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      {/* فوتر سه‌بخشی لوکس - احیا شده */}
+      {/* فوتر سه‌بخشی لوکس */}
       <footer className="mt-auto pt-10 border-t border-white/5 pb-8 no-print">
         <div className="flex flex-col md:flex-row justify-between items-center gap-10">
           <div className="flex items-center gap-6">
